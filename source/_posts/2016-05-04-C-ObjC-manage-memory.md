@@ -49,6 +49,8 @@ ObjC/C++ 虽然各自带有自己的色彩，但是它们同出师门，仍旧�
 	- （C++）在类中定义：全局变量，但是只在此类中可见
 
 
+- 全局变量：在一个代码文件当中，一个变量要么定义在函数中，要么定义在在函数外面。当定义在函数外面时，这个变量就有了全局作用域，成为了全局变量。全局变量不光意味着这个变量可以在当前文件中使用，也意味着这个变量可以在其他文件中使用。如何设置在`.m` 中代表当前文件（类）有效，如果设置在 `.h` 则整个工程可见。
+
 **常量区**
 
 用于存放常量，一旦定义之后就不能被修改。程序退出后释放。
@@ -267,5 +269,5 @@ self.property = a;
 **注意：**现在大家基本都是 ARC 写的比较多，会忽略这一点，但是根据上面的内容，我们看到在 MRC 中直接对 self.proprety 赋值和先赋给临时变量，再赋值给 self.property，确实是有区别的。
 
 #### 参考链接：
-
+[https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html)
 [https://hit-alibaba.github.io/interview/basic/arch/Memory-Management.html](https://hit-alibaba.github.io/interview/basic/arch/Memory-Management.html)
