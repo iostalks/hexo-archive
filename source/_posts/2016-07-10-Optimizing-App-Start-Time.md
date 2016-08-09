@@ -1,12 +1,12 @@
 ---
-title: 优化 App 的启动时间
+title: 优化 App 的启动速度
 date: 2016-07-10 15:23:54
 tags:
 ---
 
 App 的启动速度不仅影响我们调试，也直接关系到用户体验。之前有些很久没有打开过的项目，需要花费很长的时间才完成编译；对应的 App 在点击后，许久才出现启动画面。你是否为这些问题苦恼过呢？
 
-这是我观看 WWDC2016 Sessions406 《Optimizing App Start Time》的笔记。虽然没有字幕听起来很吃力，不过光看 Slide 也还是有不少收获的。下面是内容部分
+这是我观看 WWDC2016 Sessions406 《Optimizing App Start Time》的笔记。
 
 <!--more-->
 
@@ -122,6 +122,8 @@ exec()执行过程中操作系统会随机分配一段可用的内存给应用�
 4. 准备代码层面的加载(ObjC prepare images)
 5. 运行初始化构造器(Run initializes).
 
+![image](http://7xsto7.com1.z0.glb.clouddn.com/process.jpeg)
+
 以下是对各个过程具体的介绍：
 
 ######1. 加载动态库
@@ -141,18 +143,18 @@ exec()执行过程中操作系统会随机分配一段可用的内存给应用�
 
 将图片资源根据其地址进行加载，重建信息被编码在 `LINKEDIT` segment 中。重建的过程按照地址顺序执行，所以可以被内核预取。
 
-#####3. 绑定（Binding）
+######3. 绑定（Binding）
 应用程序对动态库的引用只在符号层(symbolc)面，绑定过程中需要加载器通过函数名来查找，相对于重建这个过程需要更多的计算步骤。
 
 ![image](http://7xsto7.com1.z0.glb.clouddn.com/binding.png)
 
-#####4. ObjC 准备
+######4. ObjC 准备
 - 完成重建和绑定后的配置工作
 - 登记定义的 ObjC 类
 - 更新实例变量对应的内存位置
 - 分类的方法被插入到主类
 
-#####5. 初始化构造器（Initializer）
+######5. 初始化构造器（Initializer）
 - 静态分配内存的对象的初始化
 - 调用 +load 方法
 - 调用相关联的动态库
